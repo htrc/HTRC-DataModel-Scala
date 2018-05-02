@@ -34,10 +34,12 @@ lazy val commonSettings = Seq(
     ("Git-Dirty", git.gitUncommittedChanges.value.toString),
     ("Build-Date", new java.util.Date().toString)
   ),
-//  wartremoverErrors ++= Warts.unsafe.diff(Seq(
-//    Wart.DefaultArguments,
-//    Wart.NonUnitStatements
-//  )),
+  wartremoverErrors ++= Warts.unsafe.diff(Seq(
+    Wart.DefaultArguments,
+    Wart.NonUnitStatements,
+    Wart.Any,
+    Wart.TryPartial
+  )),
   // force to run 'test' before 'package' and 'publish' tasks
   publish := (publish dependsOn Test / test).value,
   Keys.`package` := (Compile / Keys.`package` dependsOn Test / test).value

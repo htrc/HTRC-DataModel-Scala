@@ -19,6 +19,7 @@ object HtrcVolume {
     override protected def isXmlReaderNamespaceAware: Boolean = true
   }
 
+  @SuppressWarnings(Array("org.wartremover.warts.Throw"))
   def from(pairtreeVolume: PairtreeVolume)
           (implicit codec: Codec): Try[HtrcVolume] = Try {
     managed(Source.fromFile(pairtreeVolume.metsPath).bufferedReader()) and
@@ -58,6 +59,7 @@ object HtrcVolume {
     * @param metsXml The METS XML
     * @return The sequence of page file names
     */
+  @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf", "org.wartremover.warts.Null"))
   protected def getPageSeqMapping(metsXml: Document): Seq[(String, String)] = {
     val xpath = XPathFactory.newInstance().newXPath()
     xpath.setNamespaceContext(new NamespaceContext {
@@ -97,6 +99,13 @@ class HtrcVolume(val volumeId: HtrcVolumeId, val pages: IndexedSeq[HtrcPage]) {
     PageStructureParser.parsePageStructure(pages, builder = htrcStructuredPageBuilder)
 
   def text: String = pages.view.map(_.asInstanceOf[Page].text).mkString(System.lineSeparator())
+
+  override def hashCode(): Int = volumeId.hashCode()
+
+  override def equals(obj: scala.Any): Boolean = obj match {
+    case other: HtrcVolume => volumeId == other.volumeId
+    case _ => false
+  }
 
   override def toString: String = f"HtrcVolume($volumeId, ${pages.length}%,d pages)"
 }
