@@ -13,11 +13,11 @@ object PairtreeVolume {
   protected val pairtree: Pairtree = new Pairtree()
 
   /**
-    * Parses an HTRC pairtree file path into a `PairtreeDocument` that can be used
+    * Parses an HTRC pairtree file path into a `PairtreeVolume` that can be used
     * to extract metadata about the document
     *
     * @param filePath The pairtree file path
-    * @return The `PairtreeDocument` wrapped in a `Try`
+    * @return The `Try[PairtreeVolume]` containing the success or failure
     */
   def from(filePath: String): Try[PairtreeVolume] = normalize(filePath) match {
     case pairtreeFilePartsRegex(pairtreeRoot, libId, cleanIdPart) =>
@@ -29,27 +29,48 @@ object PairtreeVolume {
   }
 
   /**
-    * Parses an HTRC pairtree file into a `PairtreeDocument` that can be used
+    * Parses an HTRC pairtree file into a `PairtreeVolume` that can be used
     * to extract metadata about the document
     *
     * @param file The pairtree file
-    * @return The `PairtreeDocument` wrapped in a `Try`
+    * @return The `Try[PairtreeVolume]` containing the success or failure
     */
   def from(file: File): Try[PairtreeVolume] = Try(file.getCanonicalPath).flatMap(from)
 
   /**
-    * Created a `PairtreeDocument` instance from a HTRC volume identifier
+    * Creates a `PairtreeVolume` instance from a HTRC volume identifier
     *
     * @param volumeId The volume identifier
-    * @return The `PairtreeDocument` instance
+    * @return The `PairtreeVolume` instance
     */
   def apply(volumeId: HtrcVolumeId): PairtreeVolume = PairtreeVolume(volumeId, "")
+
+  /**
+    * Creates a `PairtreeVolume` instance from a HTRC volume identifier and pairtree root path
+    *
+    * @param volumeId The volume identifier
+    * @param pairtreeRoot The pairtree root path
+    * @return The `PairtreeVolume` instance
+    */
+  def apply(volumeId: HtrcVolumeId, pairtreeRoot: String): PairtreeVolume = {
+    val root = Some(pairtreeRoot.trim)
+      .filterNot(_.isEmpty)
+      .map(s => if (s.endsWith("/")) s else s + "/")
+      .getOrElse("")
+
+    new PairtreeVolume(volumeId, root)
+  }
+
+  def unapply(vol: PairtreeVolume): Option[(HtrcVolumeId, String)] =
+    Some((vol.volumeId, vol.pairtreeRoot))
 
   protected def normalize(path: String): String = path.replaceAll("/{2,}", "/")
 }
 
-case class PairtreeVolume(volumeId: HtrcVolumeId, pairtreeRoot: String) {
+class PairtreeVolume(val volumeId: HtrcVolumeId, val pairtreeRoot: String) {
   import PairtreeVolume._
+
+  require(pairtreeRoot.isEmpty || pairtreeRoot.endsWith("/"))
 
   def this(volumeId: HtrcVolumeId) = this(volumeId, "")
 
@@ -62,7 +83,7 @@ case class PairtreeVolume(volumeId: HtrcVolumeId, pairtreeRoot: String) {
     */
   def rootPath: String = {
     val (libId, cleanIdPart) = volumeId.partsClean
-    normalize(s"$pairtreeRoot/$libId/pairtree_root/$ppath/$cleanIdPart")
+    s"$pairtreeRoot$libId/pairtree_root/$ppath/$cleanIdPart"
   }
 
   /**
@@ -76,7 +97,7 @@ case class PairtreeVolume(volumeId: HtrcVolumeId, pairtreeRoot: String) {
     */
   def pathPrefix: String = {
     val (libId, cleanIdPart) = volumeId.partsClean
-    normalize(s"$pairtreeRoot/$libId/pairtree_root/$ppath/$cleanIdPart/$cleanIdPart")
+    s"$pairtreeRoot$libId/pairtree_root/$ppath/$cleanIdPart/$cleanIdPart"
   }
 
   /**
@@ -107,7 +128,13 @@ case class PairtreeVolume(volumeId: HtrcVolumeId, pairtreeRoot: String) {
     */
   def extractedFeaturesPath: String = {
     val (libId, cleanIdPart) = volumeId.partsClean
-    normalize(s"$pairtreeRoot/$libId/pairtree_root/$ppath/$cleanIdPart/$libId.$cleanIdPart.json.bz2")
+    s"$pairtreeRoot$libId/pairtree_root/$ppath/$cleanIdPart/$libId.$cleanIdPart.json.bz2"
   }
 
+  override def hashCode(): Int = (volumeId.uncleanId + pairtreeRoot).hashCode
+
+  override def equals(obj: scala.Any): Boolean = obj match {
+    case other: PairtreeVolume => volumeId == other.volumeId && pairtreeRoot == other.pairtreeRoot
+    case _ => false
+  }
 }
