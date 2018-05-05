@@ -40,7 +40,7 @@ class HtrcPage(val seq: String, val textLines: Lines) extends Page {
         if (textOptions contains RemoveEmptyLines)
           lines = lines.filter(_.nonEmpty)
 
-        if (textOptions contains FixHyphenation)
+        if (textOptions contains DehyphenateAtEol)
           lines = lines.dehyphenate()
 
         if (textOptions contains ParaLines)
