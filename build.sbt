@@ -57,7 +57,7 @@ lazy val `data-model` = (project in file(".")).
       "org.hathitrust.htrc"           %% "scala-utils"          % "2.5.1",
       "gov.loc"                       %  "pairtree"             % "1.1.2",
       "com.jsuereth"                  %% "scala-arm"            % "2.0",
-      "org.scalacheck"                %% "scalacheck"           % "1.13.5"      % Test,
+      "org.scalacheck"                %% "scalacheck"           % "1.14.0"      % Test,
       "org.scalatest"                 %% "scalatest"            % "3.0.5"       % Test
     ),
     crossScalaVersions := Seq("2.12.6", "2.11.12")
