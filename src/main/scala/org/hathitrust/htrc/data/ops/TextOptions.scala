@@ -1,4 +1,4 @@
-package org.hathitrust.htrc.data
+package org.hathitrust.htrc.data.ops
 
 object TextOptions extends Enumeration {
   type TextOptions = Value
