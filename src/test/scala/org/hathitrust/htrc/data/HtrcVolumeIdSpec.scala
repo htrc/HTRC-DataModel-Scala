@@ -2,13 +2,13 @@ package org.hathitrust.htrc.data
 
 import org.hathitrust.htrc.data.exceptions.InvalidHtrcVolumeIdException
 import org.scalatest.TryValues._
-import org.scalatest.prop.PropertyChecks
 import org.scalatest.{FlatSpec, Matchers, ParallelTestExecution}
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 
 import scala.util.{Failure, Success}
 
 class HtrcVolumeIdSpec extends FlatSpec
-  with PropertyChecks with Matchers with ParallelTestExecution {
+  with ScalaCheckPropertyChecks with Matchers with ParallelTestExecution {
 
   "An HtrcVolumeId" should "be successfully created from a valid (unclean) volume id" in {
     val uncleanId = "uc2.ark:/13960/t4qj7970f"
