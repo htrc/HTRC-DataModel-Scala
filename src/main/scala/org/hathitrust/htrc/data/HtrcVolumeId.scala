@@ -25,7 +25,7 @@ object HtrcVolumeId {
   }
 }
 
-case class HtrcVolumeId(uncleanId: String) {
+case class HtrcVolumeId(uncleanId: String) extends Serializable {
   import HtrcVolumeId._
 
   require(uncleanId.contains("."), s"Invalid HTRC volume id: $uncleanId")

@@ -67,7 +67,7 @@ object PairtreeVolume {
   protected def normalize(path: String): String = path.replaceAll("/{2,}", "/")
 }
 
-class PairtreeVolume(val volumeId: HtrcVolumeId, val pairtreeRoot: String) {
+class PairtreeVolume(val volumeId: HtrcVolumeId, val pairtreeRoot: String) extends Serializable {
   import PairtreeVolume._
 
   require(pairtreeRoot.isEmpty || pairtreeRoot.endsWith("/"))

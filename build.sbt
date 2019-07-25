@@ -8,16 +8,17 @@ lazy val commonSettings = Seq(
   organization := "org.hathitrust.htrc",
   organizationName := "HathiTrust Research Center",
   organizationHomepage := Some(url("https://www.hathitrust.org/htrc")),
-  scalaVersion := "2.12.6",
+  scalaVersion := "2.12.8",
   scalacOptions ++= Seq(
     "-feature",
     "-deprecation",
     "-language:postfixOps",
     "-language:implicitConversions"
   ),
-  resolvers ++= Seq(
-    "I3 Repository" at "http://nexus.htrc.illinois.edu/content/groups/public",
-    Resolver.mavenLocal
+  externalResolvers := Seq(
+    Resolver.defaultLocal,
+    Resolver.mavenLocal,
+    "HTRC Nexus Repository" at "http://nexus.htrc.illinois.edu/content/groups/public",
   ),
   publishTo := {
     val nexus = "https://nexus.htrc.illinois.edu/"
@@ -26,7 +27,6 @@ lazy val commonSettings = Seq(
     else
       Some("HTRC Releases Repository"  at nexus + "content/repositories/releases")
   },
-  credentials += Credentials(Path.userHome / ".ivy2" / ".credentials" / "nexus.htrc.illinois.edu"),
   packageOptions in (Compile, packageBin) += Package.ManifestAttributes(
     ("Git-Sha", git.gitHeadCommit.value.getOrElse("N/A")),
     ("Git-Branch", git.gitCurrentBranch.value),
@@ -58,7 +58,7 @@ lazy val `data-model` = (project in file(".")).
       "gov.loc"                       %  "pairtree"             % "1.1.2",
       "com.jsuereth"                  %% "scala-arm"            % "2.0",
       "org.scalacheck"                %% "scalacheck"           % "1.14.0"      % Test,
-      "org.scalatest"                 %% "scalatest"            % "3.0.5"       % Test
+      "org.scalatest"                 %% "scalatest"            % "3.0.8"       % Test
     ),
-    crossScalaVersions := Seq("2.12.6", "2.11.12")
+    crossScalaVersions := Seq("2.12.8", "2.11.12")
   )

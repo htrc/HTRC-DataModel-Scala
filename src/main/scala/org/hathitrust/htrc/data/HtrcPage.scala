@@ -7,7 +7,7 @@ import org.hathitrust.htrc.textprocessing.runningheaders.{Lines, Page}
 
 import scala.io.{Codec, Source}
 
-class HtrcPage(val seq: String, val textLines: Lines) extends Page with PageOps {
+class HtrcPage(val seq: String, val textLines: Lines) extends Page with PageOps with Serializable {
 
   def this(seq: String, lines: Iterator[String]) = this(seq, lines.toIndexedSeq)
 
