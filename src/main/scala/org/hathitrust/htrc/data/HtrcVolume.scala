@@ -92,7 +92,7 @@ object HtrcVolume {
       new HtrcStructuredPage(page.seq, page.textLines, headerLineCount, footerLineCount)
 }
 
-class HtrcVolume(val volumeId: HtrcVolumeId, val pages: IndexedSeq[HtrcPage]) {
+class HtrcVolume(val volumeId: HtrcVolumeId, val pages: IndexedSeq[HtrcPage]) extends Serializable {
   import HtrcVolume.htrcStructuredPageBuilder
 
   lazy val structuredPages: IndexedSeq[HtrcStructuredPage] =
