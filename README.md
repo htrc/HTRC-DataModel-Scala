@@ -8,7 +8,7 @@ then find the result in `target/scala-2.12/` folder.
 
 # Usage
 ## SBT
-`libraryDependencies += "org.hathitrust.htrc" %% "data-model" % "1.6"`
+`libraryDependencies += "org.hathitrust.htrc" %% "data-model" % "1.7"`
 
 ## Maven
 
@@ -17,7 +17,7 @@ then find the result in `target/scala-2.12/` folder.
 <dependency>
   <groupId>org.hathitrust.htrc</groupId>
   <artifactId>data-model_2.12</artifactId>
-  <version>1.6</version>
+  <version>1.7</version>
 </dependency>
 ```
 
@@ -26,7 +26,7 @@ then find the result in `target/scala-2.12/` folder.
 <dependency>
   <groupId>org.hathitrust.htrc</groupId>
   <artifactId>data-model_2.11</artifactId>
-  <version>1.6</version>
+  <version>1.7</version>
 </dependency>
 ```
 
