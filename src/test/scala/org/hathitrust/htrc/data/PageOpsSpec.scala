@@ -3,11 +3,12 @@ package org.hathitrust.htrc.data
 import org.hathitrust.htrc.data.ops.PageOps
 import org.hathitrust.htrc.data.ops.TextOptions._
 import org.hathitrust.htrc.textprocessing.runningheaders.{Lines, Page}
-import org.scalatest.{FunSuite, Matchers, ParallelTestExecution}
-import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
+import org.scalatest.ParallelTestExecution
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
-class PageOpsSpec extends FunSuite
-  with ScalaCheckPropertyChecks with Matchers with ParallelTestExecution {
+class PageOpsSpec extends AnyFunSuite
+  with Matchers with ParallelTestExecution {
 
   val page: Page with PageOps = new Page with PageOps {
     override def textLines: Lines = IndexedSeq(

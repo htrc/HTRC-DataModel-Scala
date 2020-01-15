@@ -1,14 +1,15 @@
 package org.hathitrust.htrc.data
 
 import org.hathitrust.htrc.data.exceptions.InvalidPairtreePathException
+import org.scalatest.ParallelTestExecution
 import org.scalatest.TryValues._
-import org.scalatest.{FlatSpec, Matchers, ParallelTestExecution}
-import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 import scala.util.Failure
 
-class PairtreeVolumeSpec extends FlatSpec
-  with ScalaCheckPropertyChecks with Matchers with ParallelTestExecution {
+class PairtreeVolumeSpec extends AnyFlatSpec
+  with Matchers with ParallelTestExecution {
 
   "A PairtreeVolume" should "be successfully created from a valid full path" in {
     val volPath = "/NGPD/uc2/pairtree_root/ar/k+/=1/39/60/=t/4q/j7/97/0f/ark+=13960=t4qj7970f/ark+=13960=t4qj7970f.zip"
