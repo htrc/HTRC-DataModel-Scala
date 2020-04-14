@@ -3,7 +3,7 @@ package org.hathitrust.htrc.data
 import java.io.File
 
 import gov.loc.repository.pairtree.Pairtree
-import org.hathitrust.htrc.data.exceptions.InvalidPairtreePathException
+import org.hathitrust.htrc.data.exceptions.InvalidPathException
 
 import scala.util.{Failure, Success, Try}
 import scala.util.matching.Regex
@@ -25,7 +25,7 @@ object PairtreeVolume {
       val uncleanId = s"$libId.$uncleanIdPart"
       Success(PairtreeVolume(HtrcVolumeId(uncleanId), pairtreeRoot))
 
-    case _ => Failure(InvalidPairtreePathException(filePath))
+    case _ => Failure(InvalidPathException(filePath))
   }
 
   /**
@@ -36,6 +36,9 @@ object PairtreeVolume {
     * @return The `Try[PairtreeVolume]` containing the success or failure
     */
   def from(file: File): Try[PairtreeVolume] = Try(file.getCanonicalPath).flatMap(from)
+
+  def from(stubbyVol: StubbytreeVolume, newRoot: String = ""): PairtreeVolume =
+    PairtreeVolume(stubbyVol.volumeId, newRoot)
 
   /**
     * Creates a `PairtreeVolume` instance from a HTRC volume identifier
