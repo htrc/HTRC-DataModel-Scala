@@ -41,6 +41,10 @@ case class HtrcVolumeId(uncleanId: String) extends Serializable {
 
   def toPairtreeDoc(pairtreeRoot: String): PairtreeVolume = PairtreeVolume(this, pairtreeRoot)
 
+  def toStubbytreeDoc: StubbytreeVolume = StubbytreeVolume(this)
+
+  def toStubbytreeDoc(stubbytreeRoot: String): StubbytreeVolume = StubbytreeVolume(this, stubbytreeRoot)
+
   def parts: (String, String) = uncleanId match {
     case idRegex(libId, uncleanIdPart) => libId -> uncleanIdPart
   }

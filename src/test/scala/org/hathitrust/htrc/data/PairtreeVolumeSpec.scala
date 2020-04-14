@@ -1,6 +1,6 @@
 package org.hathitrust.htrc.data
 
-import org.hathitrust.htrc.data.exceptions.InvalidPairtreePathException
+import org.hathitrust.htrc.data.exceptions.InvalidPathException
 import org.scalatest.ParallelTestExecution
 import org.scalatest.TryValues._
 import org.scalatest.flatspec.AnyFlatSpec
@@ -63,7 +63,7 @@ class PairtreeVolumeSpec extends AnyFlatSpec
     val wrongPath = "/ar/k+/=1/39/60/=t/4q/j7/97/0f/ark+=13960=t4qj7970f/ark+=13960=t4qj7970f.zip"
     val volume = PairtreeVolume.from(wrongPath)
 
-    volume.failure shouldBe Failure(InvalidPairtreePathException(wrongPath))
+    volume.failure shouldBe Failure(InvalidPathException(wrongPath))
   }
 
   it should "be convertible to a path prefix" in {
