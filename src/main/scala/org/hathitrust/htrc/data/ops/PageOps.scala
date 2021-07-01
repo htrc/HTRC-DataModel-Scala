@@ -42,7 +42,7 @@ trait PageOps {
 
         if (textOptions contains ParaLines)
           lines = lines.map(splitEol).filter(_._1.nonEmpty)
-            .groupConsecutiveWhen((l1, _) => !EndParagraphPunct.contains(l1._1.last))
+            .groupConsecutiveWhen[List]((l1, _) => !EndParagraphPunct.contains(l1._1.last))
             .map(
               _.reduceOption { (l1, l2) =>
                 val space = if (l1._1.endsWith(" ") || l2._1.startsWith(" ")) "" else " "
