@@ -4,11 +4,11 @@ Contains object models representing volumes, pages, ids and pairtree items in Sc
 # Build
 `sbt package`
 
-then find the result in `target/scala-2.12/` folder.
+then find the result in `target/scala-2.13/` folder.
 
 # Usage
 ## SBT
-`libraryDependencies += "org.hathitrust.htrc" %% "data-model" % "1.9"`
+`libraryDependencies += "org.hathitrust.htrc" %% "data-model" % "2.13"`
 
 ## Maven
 
@@ -17,16 +17,16 @@ then find the result in `target/scala-2.12/` folder.
 <dependency>
   <groupId>org.hathitrust.htrc</groupId>
   <artifactId>data-model_2.12</artifactId>
-  <version>1.9</version>
+  <version>2.13</version>
 </dependency>
 ```
 
-### Scala 2.11
+### Scala 2.13
 ```
 <dependency>
   <groupId>org.hathitrust.htrc</groupId>
-  <artifactId>data-model_2.11</artifactId>
-  <version>1.9</version>
+  <artifactId>data-model_2.13</artifactId>
+  <version>2.13</version>
 </dependency>
 ```
 
