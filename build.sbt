@@ -6,7 +6,7 @@ lazy val commonSettings = Seq(
   organization := "org.hathitrust.htrc",
   organizationName := "HathiTrust Research Center",
   organizationHomepage := Some(url("https://www.hathitrust.org/htrc")),
-  scalaVersion := "2.13.6",
+  scalaVersion := "2.13.8",
   scalacOptions ++= Seq(
     "-feature",
     "-deprecation",
@@ -55,7 +55,7 @@ lazy val ammoniteSettings = Seq(
     {
       val version = scalaBinaryVersion.value match {
         case "2.10" => "1.0.3"
-        case _ ⇒  "2.4.0-23-76673f7f"
+        case _ ⇒  "2.5.3"
       }
       "com.lihaoyi" % "ammonite" % version % Test cross CrossVersion.full
     },
@@ -82,11 +82,11 @@ lazy val `data-model` = (project in file("."))
       "org.hathitrust.htrc"           %% "running-headers"          % "2.13",
       "org.hathitrust.htrc"           %% "scala-utils"              % "2.13",
       "gov.loc"                       %  "pairtree"                 % "1.1.2",
-      "org.scala-lang.modules"        %% "scala-collection-compat"  % "2.5.0",
-      "org.scalacheck"                %% "scalacheck"               % "1.15.4"  % Test,
-      "org.scalatest"                 %% "scalatest"                % "3.2.10"  % Test,
-      "org.scalatestplus"             %% "scalacheck-1-15"          % "3.2.9.0" % Test
+      "org.scala-lang.modules"        %% "scala-collection-compat"  % "2.7.0",
+      "org.scalacheck"                %% "scalacheck"               % "1.16.0"    % Test,
+      "org.scalatest"                 %% "scalatest"                % "3.2.12"    % Test,
+      "org.scalatestplus"             %% "scalacheck-1-15"          % "3.2.11.0"  % Test
     ),
     ThisBuild / versionScheme := Some("semver-spec"),
-    crossScalaVersions := Seq("2.13.6", "2.12.15")
+    crossScalaVersions := Seq("2.13.8", "2.12.15")
   )
