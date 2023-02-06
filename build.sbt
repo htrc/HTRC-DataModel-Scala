@@ -75,7 +75,7 @@ lazy val `data-model` = (project in file("."))
     description := "Defines the data model for various HTRC components (volumes, pages, etc.)",
     licenses += "Apache2" -> url("http://www.apache.org/licenses/LICENSE-2.0"),
     libraryDependencies ++= Seq(
-      "org.hathitrust.htrc"           %% "running-headers"          % "2.14",
+      "org.hathitrust.htrc"           %% "running-headers"          % "2.14.0",
       "org.hathitrust.htrc"           %% "scala-utils"              % "2.14.3",
       "gov.loc"                       %  "pairtree"                 % "1.1.2",
       "org.scala-lang.modules"        %% "scala-collection-compat"  % "2.9.0",
