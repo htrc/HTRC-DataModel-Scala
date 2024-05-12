@@ -1,4 +1,4 @@
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/htrc/HTRC-DataModel-Scala/ci.yml?branch=develop)](https://github.com/htrc/HTRC-DataModel-Scala/actions/workflows/ci.yml)
+[![Scala CI](https://github.com/htrc/HTRC-DataModel-Scala/actions/workflows/ci.yml/badge.svg)](https://github.com/htrc/HTRC-DataModel-Scala/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/github/htrc/HTRC-DataModel-Scala/branch/develop/graph/badge.svg?token=8V4H7VMNYP)](https://codecov.io/github/htrc/HTRC-DataModel-Scala)
 [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/htrc/HTRC-DataModel-Scala?include_prereleases&sort=semver)](https://github.com/htrc/HTRC-DataModel-Scala/releases/latest)
 
